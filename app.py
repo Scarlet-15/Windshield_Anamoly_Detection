@@ -1,7 +1,4 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import cv2
 
 st.title('Car windshild defect detection')
 uploaded_file = st.file_uploader("Choose a image file", type=["jpg","jpeg"])
