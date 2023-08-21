@@ -1,5 +1,7 @@
 streamlit
 numpy
 tensorflow
+ultralytics
+opencv-python
 
 
