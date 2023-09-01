@@ -5,3 +5,4 @@ ultralytics
 Pillow
 opencv-python-headless
 hydralit-components
+XlsxWriter
