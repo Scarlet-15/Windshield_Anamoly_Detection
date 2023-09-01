@@ -188,7 +188,7 @@ with st.sidebar:
             worksheet.write('C'+str(sum_row+1),n,format3)
             worksheet.write('C'+str(sum_row+2),st.session_state.n_defective,format3)
             worksheet.write('C'+str(sum_row+3),st.session_state.non_defective,format3)
-            writer.save()
+            writer.close()
 
             processed_data = output.getvalue()
             return processed_data
