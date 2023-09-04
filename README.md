@@ -50,7 +50,7 @@ graph LR;
 
 
 ### Sources
-1. [Deep Learning for Defect Detection](https://www.sciencedirect.com/science/article/pii/S0925231218306843)
+1. [Deep Learning for Defect Detection](https://docs.ultralytics.com/)
 2. [Streamlit: The fastest way to build data apps](https://streamlit.io/)
 
 ---
