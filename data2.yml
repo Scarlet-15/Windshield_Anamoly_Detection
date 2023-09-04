@@ -1,0 +1,5 @@
+train: C:\new_dataset2\train
+val: C:\new_dataset2\val
+
+nc: 1
+names: ['crack']
