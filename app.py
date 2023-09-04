@@ -9,6 +9,9 @@ import time
 import hydralit_components as hc
 from io import BytesIO
 
+def function():
+    st.session_state.flag=True
+
 
 #Defining state variables
 if 'n_defective' not in st.session_state:
@@ -85,9 +88,10 @@ if(n==0):
     click=st.button("## Check",use_container_width=True,disabled=True)  #Disable button when no data is uploaded
 else:
     click=st.button("## Check",use_container_width=True,disabled=False)
+
 defect=0 #Keep track of number of defective item
 for uploaded_file in uploaded_files:
-    st.session_state.flag=False
+    
     if uploaded_file is not None:
         names.append(uploaded_file.name)  
         file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
@@ -108,7 +112,7 @@ for uploaded_file in uploaded_files:
             caption.append("Non-Defective")
             cap.append("Non-Defective")
             non_defective_lst.append(im)
-
+print(st.session_state.flag)
 if(st.session_state.flag):
     click=True
 if(click):
@@ -137,7 +141,8 @@ if(click):
         st.image(defective_lst, channels="BGR",clamp=True,caption=defective_names,use_column_width=True)
     elif(option=='Non-Defective'):
         st.image(non_defective_lst, channels="BGR",clamp=True,caption=non_defective_names,use_column_width=True)
-
+    if(st.session_state.flag==True):
+        st.session_state.flag=False
     
         
 
@@ -194,14 +199,14 @@ with st.sidebar:
             return processed_data
         df_xlsx = to_excel(df)
         
-        st.download_button(label="## Generate Report :page_facing_up:",
+        butt=st.download_button(label="## Generate Report :page_facing_up:",
                            data=df_xlsx,
                            use_container_width =True,
                            file_name='Report.xlsx',
-                           disabled =disable)
+                           disabled =disable,
+                           on_click=function)
         
-        if(disable == False):
-            st.session_state.flag=True
+        
         
         with st.expander("## About this app "):
             st.write("- This software was created to inspect newly manufactured windshields for cracks by using a video stream of the constructed windshield.")
