@@ -71,7 +71,7 @@ theme_neutral = {'bgcolor': '#f9f9f9','title_color': 'orange','content_color': '
 theme_good = {'bgcolor': '#EFF8F7','title_color': 'green','content_color': 'green','icon_color': 'green', 'icon': 'fa fa-check-circle'}
 col1,col2,col3 = st.columns(3)
 
-model1 = YOLO(r"best.pt")
+model1 = YOLO(r"C:\Users\guest1.OTLBLRDSK008\Desktop\Project\runs\detect\train34\weights\best.pt")
 img=[]                #Image with bounding boxes
 init_img=[]           #Initial Images
 names=[]              #List with file names
@@ -100,7 +100,7 @@ for uploaded_file in uploaded_files:
         init_img.append(opencv_image)
         for r in res:
             n_pred=len(r.boxes)
-            im_array = r.plot()  # plot a BGR numpy array of predictions
+            im_array = r.plot(labels=False)  # plot a BGR numpy array of predictions
             im = Image.fromarray(im_array[..., ::-1])  # RGB PIL image
             img.append(im)
         if(n_pred!=0):
@@ -133,16 +133,12 @@ if(click):
             non_defective_names.append(names[i])
             cap[i]=names[i]+'    '+cap[i]
             names[i]="- " +':green['+names[i]+'    '+caption[i]+']'
-       
-    option = st.selectbox('## View', ('All', 'Defective', 'Non-Defective'))
-    if(option=='All'):
-        st.image(img, channels="BGR",clamp=True,caption=cap,use_column_width=True)
-    elif(option=='Defective'):
-        st.image(defective_lst, channels="BGR",clamp=True,caption=defective_names,use_column_width=True)
-    elif(option=='Non-Defective'):
-        st.image(non_defective_lst, channels="BGR",clamp=True,caption=non_defective_names,use_column_width=True)
+    st.image(img, channels="BGR",clamp=True,caption=cap,use_column_width=True)
+
     if(st.session_state.flag==True):
         st.session_state.flag=False
+    
+    
     
         
 
@@ -170,20 +166,20 @@ with st.sidebar:
             cell_format.set_align('center')
             cell_format.set_align('vcenter')
             worksheet.write('B1', 'CAR WINDSHILD DEFECT DETECTOR REPORT',cell_format)
-
-            format2 = workbook.add_format({'num_format': 'hh:mm AM/PM'})
-            current_date=current_time.strftime("%#d %B, %Y")
+            worksheet.write('A2',"Run Date",cell_format)
+            format2 = workbook.add_format({'num_format': ' mmm d yyyy hh:mm AM/PM'})
+            #current_date=current_time.strftime("%#d %B, %Y")
             format2.set_align('center')
             format2.set_align('vcenter')
-            worksheet.write('B2','Run Time: '+current_date)
-            worksheet.write('B3',current_time,format2)
+            worksheet.write('B2',current_time,format2)
+            #worksheet.write('B3',current_time,format2)
 
             format3=workbook.add_format()
             format3.set_align('center')
             format3.set_align('vcenter')
             worksheet.set_column('B:B', 50,format3)  
 
-            sum_row=n+6
+            sum_row=n+5
             format4 = workbook.add_format({'bold': True})
             worksheet.merge_range('A'+str(n+5)+':C'+str(sum_row), 'SUMMARY', cell_format)
             worksheet.write('B'+str(sum_row+1),'Total pieces ',format4)
@@ -197,6 +193,7 @@ with st.sidebar:
 
             processed_data = output.getvalue()
             return processed_data
+        df.index = df.index + 1
         df_xlsx = to_excel(df)
         
         butt=st.download_button(label="## Generate Report :page_facing_up:",
