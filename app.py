@@ -71,7 +71,7 @@ theme_neutral = {'bgcolor': '#f9f9f9','title_color': 'orange','content_color': '
 theme_good = {'bgcolor': '#EFF8F7','title_color': 'green','content_color': 'green','icon_color': 'green', 'icon': 'fa fa-check-circle'}
 col1,col2,col3 = st.columns(3)
 
-model1 = YOLO(r"C:\Users\guest1.OTLBLRDSK008\Desktop\Project\runs\detect\train34\weights\best.pt")
+model1 = YOLO(r"best.pt")
 img=[]                #Image with bounding boxes
 init_img=[]           #Initial Images
 names=[]              #List with file names
