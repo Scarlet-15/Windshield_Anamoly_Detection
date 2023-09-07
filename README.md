@@ -1,4 +1,4 @@
-# Release Notes for Car Windshield Defect Detection App Version 1.0.0
+# Car Windshield Defect Detection App Version 1.0.0
 ---
 
 ## Introduction
