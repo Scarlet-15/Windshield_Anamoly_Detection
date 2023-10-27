@@ -155,9 +155,9 @@ with st.sidebar:
         else:
             disable=False
         df=pd.DataFrame(df_lst,columns=["Product Name","Status"])
-        def to_excel(df,current_time):                                                                     #Funtion to write in excel
+        def to_excel(df):                                                                     #Funtion to write in excel
             output = BytesIO()
-            
+            current_time = datetime.datetime.now()
             writer = pd.ExcelWriter(output, engine='xlsxwriter')
             df.to_excel(writer, index=True, sheet_name='Sheet1',index_label='SNo.',startrow=3)
             workbook = writer.book
@@ -194,8 +194,7 @@ with st.sidebar:
             processed_data = output.getvalue()
             return processed_data
         df.index = df.index + 1
-        current_time = datetime.datetime.now()
-        df_xlsx = to_excel(df,current_time)
+        df_xlsx = to_excel(df)
         
         butt=st.download_button(label="## Generate Report :page_facing_up:",
                            data=df_xlsx,
